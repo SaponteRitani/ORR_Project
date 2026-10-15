@@ -1,0 +1,39 @@
+{%- comment -%}
+  Product card. Expects `product` (Liquid product object).
+  Renders CSS vial placeholder until real product photography is uploaded.
+{%- endcomment -%}
+<article class="product-card" data-category="{{ product.tags | join: ' ' | downcase | replace: ', ', ' ' }}">
+  {%- if product.compare_at_price > product.price -%}
+    {%- assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+    <span class="badge-sale">{{ pct }}% OFF</span>
+  {%- endif -%}
+  <a href="{{ product.url }}" class="card-link" aria-label="{{ product.title | escape }} product page">
+    {%- if product.featured_image -%}
+      <div class="vial-stage">
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy" width="600" height="600">
+      </div>
+    {%- else -%}
+      <div class="vial-stage" role="img" aria-label="{{ product.title | escape }} research vial placeholder image">
+        <div class="vial" style="--hue:200; --fill:50%;"><div class="vial-cap"></div><div class="vial-neck"></div>
+          <div class="vial-body"><div class="vial-liquid"></div><div class="vial-shine"></div>
+            <div class="vial-label"><span class="vl-name">{{ product.title | truncate: 14 | escape }}</span><span class="vl-sub">Research Use Only</span><span class="vl-rulo">Research Use Only</span></div></div></div>
+      </div>
+    {%- endif -%}
+  </a>
+  <div class="card-body">
+    {%- if product.type != blank -%}<div class="card-cat">{{ product.type }}</div>{%- endif -%}
+    <h3 class="brand-name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- assign v = product.selected_or_first_available_variant -%}
+    {%- if v.sku != blank -%}<div class="card-sku">SKU: {{ v.sku }}</div>{%- endif -%}
+    {%- if product.description != blank -%}
+      <p class="card-mech">{{ product.description | strip_html | truncatewords: 24 }}</p>
+    {%- endif -%}
+    <div class="card-price">
+      <span class="price">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="price-compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+    <a href="{{ product.url }}" class="btn btn-navy btn-block">View Product</a>
+  </div>
+</article>

@@ -1,0 +1,65 @@
+{%- comment -%} Collection / catalog page (mockup: collections.html). JS filters operate on product tags. {%- endcomment -%}
+{% paginate collection.products by 24 %}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    <span aria-current="page">{{ collection.title }}</span>
+  </nav>
+
+  <div class="center" style="margin-top:1rem;">
+    <span class="eyebrow">The catalog</span>
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="lead">{{ collection.description }}</div>
+    {%- else -%}
+      <p class="lead">Every batch 99%+ purity with published COAs. For laboratory research use only.</p>
+    {%- endif -%}
+  </div>
+
+  <div class="compliance-banner" role="note" style="margin-top:1.5rem;">
+    <strong>⚠ Research Use Only</strong>
+    <p>All products are supplied strictly for in-vitro laboratory research. Not for human or veterinary use. Not FDA approved. No dosing guidance provided. Purchasers must be 21+ and qualified researchers.</p>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <p style="font-size:0.8rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:0.5rem;">By delivery format</p>
+    <div class="filter-bar" role="group" aria-label="Filter products by delivery format" style="margin-top:0;" id="blends">
+      <button class="filter-btn active" data-filter="all" type="button">All</button>
+      <button class="filter-btn" data-filter="injectables" type="button">Injectables</button>
+      <button class="filter-btn" data-filter="nasal" type="button">Nasal Sprays</button>
+      <button class="filter-btn" data-filter="oral" type="button">Oral Capsules</button>
+      <button class="filter-btn" data-filter="blends" type="button">Blends</button>
+      <button class="filter-btn" data-filter="stacks" type="button">Stacks</button>
+    </div>
+    <p style="font-size:0.8rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint); margin:1rem 0 0.5rem;">By research focus</p>
+    <div class="filter-bar" role="group" aria-label="Filter products by research focus" style="margin-top:0;">
+      <button class="filter-btn" data-filter="recovery" type="button">Recovery &amp; Repair</button>
+      <button class="filter-btn" data-filter="cognitive" type="button">Cognitive</button>
+      <button class="filter-btn" data-filter="metabolic" type="button">Metabolic</button>
+      <button class="filter-btn" data-filter="ghaxis" type="button">GH Axis</button>
+      <button class="filter-btn" data-filter="skin" type="button">Skin &amp; Appearance</button>
+    </div>
+  </div>
+  <p class="filter-count">{{ collection.products_count }} products</p>
+
+  <div class="product-grid mb-2" id="catalog-grid">
+    {%- for product in collection.products -%}
+      {% render 'product-card', product: product %}
+    {%- else -%}
+      <div class="coa-placeholder" style="grid-column:1/-1;">
+        <img class="doc-icon" src="{{ 'icon-lab.png' | asset_url }}" alt="" aria-hidden="true">
+        <h3>Catalog coming soon</h3>
+        <p>Products will appear here once they are added in Shopify admin. Tag products with delivery formats (<code>injectables</code>, <code>nasal</code>, <code>oral</code>, <code>blends</code>, <code>stacks</code>) and research focuses (<code>recovery</code>, <code>cognitive</code>, <code>metabolic</code>, <code>ghaxis</code>, <code>skin</code>) to power the filters above.</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+  <nav class="pagination center" aria-label="Pagination">
+    {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-outline">← Previous</a>{%- endif -%}
+    <span style="margin:0 1rem;">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+    {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-outline">Next →</a>{%- endif -%}
+  </nav>
+  {%- endif -%}
+</div>
+{% endpaginate %}

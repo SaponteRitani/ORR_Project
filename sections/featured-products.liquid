@@ -1,0 +1,52 @@
+ {%- comment -%}
+  Best sellers — loops a collection; graceful placeholders when empty (preview mode).
+{%- endcomment -%}
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="lead">{{ section.settings.subheading }}</p>
+    </div>
+    {%- assign feat = collections[section.settings.collection] -%}
+    <div class="product-grid">
+      {%- if feat and feat.products.size > 0 -%}
+        {%- for product in feat.products limit: section.settings.limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Preview placeholders until products are added {%- endcomment -%}
+        {%- for i in (1..8) -%}
+        <article class="product-card product-card--placeholder" aria-hidden="true">
+          <div class="vial-stage">
+            <div class="vial" style="--hue:210; --fill:50%;"><div class="vial-cap"></div><div class="vial-neck"></div>
+              <div class="vial-body"><div class="vial-liquid"></div><div class="vial-shine"></div>
+                <div class="vial-label"><span class="vl-name">OranR</span><span class="vl-sub">Coming soon</span><span class="vl-rulo">Research Use Only</span></div></div></div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Research peptide</div>
+            <h3 class="brand-name">Coming soon</h3>
+            <div class="card-price"><span class="price">—</span></div>
+          </div>
+        </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    <div class="center mt-2">
+      <a href="/collections/all" class="btn btn-outline">View All Compounds</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Most requested by researchers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best-Selling Research Peptides" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "The compounds laboratories ask for most — each with a published, batch-matched certificate of analysis." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 4, "max": 12, "step": 4, "default": 8 }
+  ],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}

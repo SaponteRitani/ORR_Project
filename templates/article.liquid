@@ -1,0 +1,32 @@
+{%- comment -%} Article page (mockup: article.html) {%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    <a href="{{ blog.url }}">{{ blog.title }}</a><span class="sep">›</span>
+    <span aria-current="page">{{ article.title }}</span>
+  </nav>
+  <div class="article-hero">
+    {%- if article.tags.size > 0 -%}<span class="blog-tag">{{ article.tags.first }}</span>{%- endif -%}
+    <h1>{{ article.title }}</h1>
+    <div class="blog-meta">By {{ article.author }} · {{ article.published_at | date: '%B %-d, %Y' }}</div>
+  </div>
+  <div class="article-layout">
+    <article class="article-body">
+      <div class="compliance-banner" role="note">
+        <strong>⚠ Educational content only</strong>
+        <p>This article is written for qualified researchers. It does not constitute medical advice, and nothing here is guidance for human or veterinary use of any compound.</p>
+      </div>
+      {{ article.content }}
+    </article>
+  </div>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ article.title | json }},
+    "author": { "@type": "Organization", "name": {{ article.author | json }} },
+    "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
+    "publisher": { "@type": "Organization", "name": {{ shop.name | json }} }
+  }
+  </script>
+</div>

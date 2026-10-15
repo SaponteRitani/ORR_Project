@@ -1,0 +1,23 @@
+{%- comment -%} Trust badges (from mockup) {%- endcomment -%}
+<!-- Trust badges -->
+  <div class="container">
+    <div class="trust-row">
+      <div class="trust-card">
+        <div class="icon"><img src="{{ 'icon-lab.png' | asset_url }}" alt="" aria-hidden="true"></div>
+        <h3>&ge;99% Purity</h3>
+        <p>HPLC-verified on every batch. Anything below 99% never ships.</p>
+      </div>
+      <div class="trust-card">
+        <div class="icon"><img src="{{ 'icon-shield.png' | asset_url }}" alt="" aria-hidden="true"></div>
+        <h3>30-Day Guarantee</h3>
+        <p>Wrong item, damaged vial, or COA mismatch — full refund, no interrogation.</p>
+      </div>
+      <div class="trust-card">
+        <div class="icon"><img src="{{ 'icon-certificate.png' | asset_url }}" alt="" aria-hidden="true"></div>
+        <h3>3rd-Party Tested</h3>
+        <p>Independent laboratory verification on all seven assays, published per batch.</p>
+      </div>
+    </div>
+{% schema %}
+{ "name": "Trust badges", "settings": [] }
+{% endschema %}

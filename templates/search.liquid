@@ -1,0 +1,20 @@
+{%- comment -%} Search results {%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    <span aria-current="page">Search</span>
+  </nav>
+  <div class="center" style="margin:1.5rem 0;">
+    <h1>Search Results</h1>
+    {%- if search.performed -%}
+      <p class="lead">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for "{{ search.terms | escape }}"</p>
+    {%- endif -%}
+  </div>
+  <div class="product-grid mb-2">
+    {%- for item in search.results -%}
+      {%- if item.object_type == 'product' -%}
+        {% render 'product-card', product: item %}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>

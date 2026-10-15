@@ -1,0 +1,143 @@
+{%- comment -%}
+  Hero carousel — taller canvas, blended text scrim, responsive images, SEO-safe headings.
+  MOBILE IMAGE HOOK: to use a dedicated portrait crop on phones, upload e.g.
+  science-banner-1-mobile.jpg to Files and add this to the slide's style attr:
+    --bgm:url('{{ 'science-banner-1-mobile.jpg' | asset_url }}');
+  The mobile media query below will pick it up automatically (falls back to --bg).
+{%- endcomment -%}
+<section class="hero-carousel">
+  <div class="carousel-track" id="heroCarousel">
+    <div class="carousel-slide active" style="--bg:url('{{ 'science-banner-1.jpg' | asset_url }}');">
+      <div class="container">
+        <span class="eyebrow">Pharmaceutical-Grade Research Peptides</span>
+        <h1>High-Purity Research Peptides, Third-Party Tested</h1>
+        <p class="lead">OR&amp;R supplies 99%+ purity research compounds. Every lot completes seven independent assays before it is listed in our catalog. For qualified laboratory researchers only.</p>
+        <div class="hero-ctas">
+          <a href="/collections/all" class="btn btn-primary btn-lg">Browse the Catalog</a>
+          <a href="/#quality" class="btn btn-outline-light btn-lg">How We Test</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide" style="--bg:url('{{ 'science-banner-2.jpg' | asset_url }}');">
+      <div class="container">
+        <span class="eyebrow">Independent Laboratory Verification</span>
+        <h2 class="hero-title">99%+ Purity, Confirmed by Third-Party Assays</h2>
+        <p class="lead">Identity, purity, content, heavy metals, sterility, and endotoxins — six analytical checks on every batch, with results published for every lot.</p>
+        <div class="hero-ctas">
+          <a href="/collections/all" class="btn btn-primary btn-lg">Browse the Catalog</a>
+          <a href="/#quality" class="btn btn-outline-light btn-lg">How We Test</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide" style="--bg:url('{{ 'science-banner-3.jpg' | asset_url }}');">
+      <div class="container">
+        <span class="eyebrow">Research Supply, Simplified</span>
+        <h2 class="hero-title">Same-Day Dispatch on Research Compounds</h2>
+        <p class="lead">Orders placed before 4:30 PM CT ship the same day when inventory is available. Complimentary standard shipping on orders over $125.</p>
+        <div class="hero-ctas">
+          <a href="/collections/all" class="btn btn-primary btn-lg">Browse the Catalog</a>
+          <a href="/#quality" class="btn btn-outline-light btn-lg">How We Test</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-dots" id="heroDots">
+    <button class="dot active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="dot" data-slide="1" aria-label="Slide 2"></button>
+    <button class="dot" data-slide="2" aria-label="Slide 3"></button>
+  </div>
+  <p class="hero-note">For laboratory research use only. Not for human or veterinary use. Purchasers must be 21+.</p>
+</section>
+<style>
+.hero-carousel{position:relative;overflow:hidden;min-height:720px;}
+.carousel-track{position:relative;height:100%;min-height:720px;}
+.carousel-slide{
+  position:absolute;inset:0;
+  background-image:var(--bg);
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1s ease;
+  display:flex;align-items:center;
+}
+/* Layered scrim: softens the whole image, deepens left for text, lifts the bottom
+   for the compliance note — text melts into the photo instead of sitting on a hard band. */
+.carousel-slide::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(4,10,22,0.30) 0%, rgba(4,10,22,0) 28%, rgba(4,10,22,0) 58%, rgba(4,10,22,0.62) 100%),
+    linear-gradient(90deg, rgba(4,10,22,0.80) 0%, rgba(4,10,22,0.42) 52%, rgba(4,10,22,0.10) 100%);
+}
+.carousel-slide.active{opacity:1;z-index:1;}
+.carousel-slide .container{position:relative;z-index:2;max-width:720px;}
+/* Eyebrow as a frosted pill — reads as part of the image, not floating text */
+.carousel-slide .eyebrow{
+  display:inline-block;color:#dcf3f5;
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.24);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  padding:.5rem 1.05rem;border-radius:999px;
+  font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:1.25rem;
+}
+.carousel-slide h1,
+.carousel-slide h2.hero-title{
+  color:#ffffff;
+  text-shadow:0 2px 26px rgba(0,0,0,0.60);
+  font-size:clamp(2.1rem,4.6vw,3.5rem);
+  line-height:1.1;letter-spacing:-0.015em;
+  margin:0 0 1.1rem;max-width:17ch;
+}
+.carousel-slide .lead{
+  color:rgba(255,255,255,0.93);
+  text-shadow:0 1px 14px rgba(0,0,0,0.55);
+  font-size:clamp(1rem,1.6vw,1.22rem);line-height:1.6;
+  max-width:54ch;margin:0 0 1.75rem;
+}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;}
+.carousel-dots{position:absolute;bottom:56px;left:0;right:0;display:flex;gap:10px;justify-content:center;z-index:5;}
+.carousel-dots .dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;padding:0;}
+.carousel-dots .dot.active{background:#2bb3c4;border-color:#2bb3c4;}
+.hero-note{position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:5;color:rgba(255,255,255,0.75);font-size:.82rem;margin:0;padding:0 1rem;}
+/* Mobile: longer canvas, image reframes to keep the subject, text gets room to breathe */
+@media (max-width:768px){
+  .hero-carousel,.carousel-track{min-height:94vh;}
+  .carousel-slide{
+    background-image:var(--bgm, var(--bg));
+    background-position:center 22%;
+    align-items:flex-end;
+    padding-bottom:120px;
+  }
+  .carousel-slide .container{padding:0 1.25rem;}
+  .carousel-slide::before{
+    background:
+      linear-gradient(180deg, rgba(4,10,22,0.18) 0%, rgba(4,10,22,0) 34%, rgba(4,10,22,0.55) 72%, rgba(4,10,22,0.82) 100%),
+      linear-gradient(90deg, rgba(4,10,22,0.55) 0%, rgba(4,10,22,0.28) 60%, rgba(4,10,22,0.10) 100%);
+  }
+  .carousel-dots{bottom:64px;}
+}
+</style>
+<script>
+(function(){
+  var slides = document.querySelectorAll('#heroCarousel .carousel-slide');
+  var dots = document.querySelectorAll('#heroDots .dot');
+  var current = 0, timer;
+  function go(n){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function auto(){ timer = setInterval(function(){ go(current + 1); }, 6000); }
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      clearInterval(timer);
+      go(parseInt(d.dataset.slide, 10));
+      auto();
+    });
+  });
+  auto();
+})();
+</script>
+{% schema %}
+{ "name": "Hero Carousel", "settings": [] }
+{% endschema %}
