@@ -1,0 +1,124 @@
+{%- comment -%} Single brand page, JS-driven via ?b=<id> (mockup: brand.html).
+  Create a page with template suffix 'brand'. Product links resolve to real
+  product URLs where the SKU mapping is known, else /collections/all. {%- endcomment -%}
+
+
+
+  <!-- Announcement bar -->
+  
+
+  <!-- Header -->
+  
+
+  <!-- Mobile drawer -->
+  
+  
+  <!-- Breadcrumbs (populated by JS) -->
+  <nav class="crumbs" aria-label="Breadcrumb" style="padding-top:1.5rem;">
+    <div class="container" id="brand-crumbs">
+      <a href="/">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="/pages/brands">Brands</a> <span aria-hidden="true">&rsaquo;</span> <span id="crumb-brand">Brand</span>
+    </div>
+  </nav>
+
+  <!-- Brand hero (populated by JS) -->
+  <section>
+    <div class="container">
+      <!-- Shopify URL: /pages/brand-[id] -->
+      <div class="brand-hero" id="brand-hero">
+        <div class="compound" id="brand-compound">Research Compound</div>
+        <div class="brand-mark" id="brand-name">Brand</div>
+        <p class="story" id="brand-story"></p>
+        <div class="meta-row" id="brand-meta"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand products (populated by JS) -->
+  <section>
+    <div class="container">
+      <h2 id="brand-products-h">Products</h2>
+      <div class="brands-grid" id="brand-products" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));"></div>
+    </div>
+  </section>
+
+  <!-- Backlinks -->
+  <section style="padding-bottom:3.5rem;">
+    <div class="container">
+      <h2>Keep exploring</h2>
+      <p id="brand-backlinks"></p>
+    </div>
+  </section>
+
+  
+
+<!-- Footer -->
+
+  
+  
+<script id="brand-jsonld" type="application/ld+json"></script>
+<script>
+var BRANDS = {"recura": {"id": "recura", "name": "Recura", "compound": "BPC-157", "delivery": "Injectable · Oral", "focus": "recovery", "tagline": "Recovery research, refined.", "story": "Recura is OranR's flagship BPC-157 line, supplied for in-vitro research into gastric and connective-tissue signaling pathways. Each lot is qualified through our seven-assay panel before it is ever listed. Available in lyophilized and oral capsule formats for laboratory handling studies.", "products": [["BPC-157 5mg", "ORN-BPC5", "$79.99", "$159.99", "/products/bpc-157"], ["BPC-157 Oral 60ct", "ORN-BPOC60", "$69.99", "$139.99", "/collections/all"]]}, "tissura": {"id": "tissura", "name": "Tissura", "compound": "TB-500", "delivery": "Injectable", "focus": "recovery", "tagline": "Tissue repair models, standardized.", "story": "Tissura supplies TB-500 for laboratory research into actin-binding and cellular migration pathways. The fragment has been investigated in wound-healing models for its role in cytoskeletal dynamics. Every batch ships with lot-matched COAs published before sale.", "products": [["TB-500 5mg", "ORN-TB55", "$89.99", "$179.99", "/products/tb-500"]]}, "cutigen": {"id": "cutigen", "name": "Cutigen", "compound": "GHK-Cu", "delivery": "Injectable", "focus": "skin", "tagline": "Dermal research, elevated.", "story": "Cutigen is our GHK-Cu line for in-vitro research into copper-peptide interactions with dermal fibroblast signaling. Studied in models of collagen-associated pathways and oxidative-stress responses. Qualified across all seven assays, COA with every lot.", "products": [["GHK-Cu 50mg", "ORN-GHK50", "$69.99", "$139.99", "/products/ghk-cu"]]}, "pulsara": {"id": "pulsara", "name": "Pulsara", "compound": "Ipamorelin", "delivery": "Injectable", "focus": "ghaxis", "tagline": "GH-axis research, precisely.", "story": "Pulsara supplies Ipamorelin for laboratory research into selective ghrelin-receptor (GHS-R1a) signaling. Investigated in models as a pentapeptide secretagogue analogue with high receptor specificity. Batch-verified for identity by LC-MS and purity by HPLC-UV.", "products": [["Ipamorelin 5mg", "ORN-IPA5", "$84.99", "$169.99", "/products/ipamorelin"]]}, "serelia": {"id": "serelia", "name": "Serelia", "compound": "CJC-1295 (No DAC)", "delivery": "Injectable", "focus": "ghaxis", "tagline": "GHRH analogue research.", "story": "Serelia is our CJC-1295 (No DAC) line for in-vitro research into growth-hormone-releasing-hormone receptor pathways. Studied in laboratory models of GHRH signaling cascades. Each lot is identity-confirmed and endotoxin-screened before listing.", "products": [["CJC-1295 (No DAC) 2mg", "ORN-CJC2", "$94.99", "$189.99", "/products/cjc-1295-no-dac"]]}, "melacore": {"id": "melacore", "name": "Melacore", "compound": "Melanotan II", "delivery": "Injectable", "focus": "skin", "tagline": "Pigmentation pathway research.", "story": "Melacore supplies Melanotan II for laboratory research into melanocortin-receptor signaling pathways. Investigated in models of MC1R-associated pigmentation cascades. All lots qualified through seven independent assays with published COAs.", "products": [["Melanotan II 10mg", "ORN-MT210", "$59.99", "$119.99", "/products/melanotan-ii"]]}, "telomira": {"id": "telomira", "name": "Telomira", "compound": "Epithalon", "delivery": "Injectable", "focus": "recovery", "tagline": "Telomere biology research.", "story": "Telomira is our Epithalon line for in-vitro research into telomerase-associated signaling pathways. The tetrapeptide has been investigated in cellular-aging models for its interactions with telomere regulatory mechanisms. Identity and purity verified per lot.", "products": [["Epithalon 10mg", "ORN-EPI10", "$74.99", "$149.99", "/products/epithalon"]]}, "immuna": {"id": "immuna", "name": "Immuna", "compound": "Thymosin Alpha-1", "delivery": "Injectable", "focus": "recovery", "tagline": "Immune signaling research.", "story": "Immuna supplies Thymosin Alpha-1 for laboratory research into T-cell-associated immune signaling pathways. Investigated in models of immune-modulation cascades. Every lot is sterility-tested (USP<71>) and endotoxin-screened (USP<85>).", "products": [["Thymosin Alpha-1 10mg", "ORN-TA110", "$99.99", "$199.99", "/products/thymosin-alpha-1"]]}, "lipocore": {"id": "lipocore", "name": "Lipocore", "compound": "AOD-9604", "delivery": "Injectable", "focus": "metabolic", "tagline": "Metabolic fragment research.", "story": "Lipocore is our AOD-9604 line for in-vitro research into lipolytic pathway signaling. The modified fragment has been investigated in adipocyte models for its interactions with fat-metabolism cascades. Qualified across all seven assays before sale.", "products": [["AOD-9604 5mg", "ORN-AOD5", "$64.99", "$129.99", "/products/aod-9604"]]}, "tricora": {"id": "tricora", "name": "Tricora", "compound": "KPV", "delivery": "Injectable", "focus": "recovery", "tagline": "Inflammatory pathway research.", "story": "Tricora supplies KPV for laboratory research into melanocortin-associated anti-inflammatory signaling pathways. The tripeptide has been investigated in models of cytokine-response modulation. Lot-matched COAs published with every batch.", "products": [["KPV 10mg", "ORN-KPV10", "$69.99", "$139.99", "/products/kpv"]]}, "cogniva": {"id": "cogniva", "name": "Cogniva", "compound": "Semax", "delivery": "Injectable · Nasal", "focus": "cognitive", "tagline": "Cognitive peptide research.", "story": "Cogniva is our Semax line for in-vitro research into neurotropic signaling pathways, including BDNF-associated cascades. Investigated in models of cognitive-neurochemical pathways. Available in lyophilized and nasal formats for laboratory handling studies.", "products": [["Semax 30mg", "ORN-SMX30", "$54.99", "$109.99", "/products/semax"]]}, "serenex": {"id": "serenex", "name": "Serenex", "compound": "Selank", "delivery": "Injectable · Nasal", "focus": "cognitive", "tagline": "Anxiolytic pathway research.", "story": "Serenex supplies Selank for laboratory research into GABA-associated and immunomodulatory signaling pathways. The heptapeptide has been investigated in models of stress-response cascades. Qualified through seven assays, COA per lot.", "products": [["Selank 5mg", "ORN-SLK5", "$54.99", "$109.99", "/products/selank"]]}, "bondra": {"id": "bondra", "name": "Bondra", "compound": "Oxytocin", "delivery": "Nasal", "focus": "cognitive", "tagline": "Neuropeptide nasal research.", "story": "Bondra is our Oxytocin nasal line for in-vitro research into neuropeptide receptor signaling pathways. Supplied in a nasal delivery format for laboratory studies of mucosal absorption models. Identity-confirmed by LC-MS per batch.", "products": [["Oxytocin 10mg Nasal", "ORN-OXY10", "$64.99", "$129.99", "/collections/all"]]}, "somnia": {"id": "somnia", "name": "Somnia", "compound": "DSIP", "delivery": "Nasal", "focus": "cognitive", "tagline": "Sleep architecture research.", "story": "Somnia supplies DSIP (Delta Sleep-Inducing Peptide) for laboratory research into sleep-architecture signaling pathways. The nonapeptide has been investigated in models of circadian-associated cascades. Nasal format for laboratory handling studies.", "products": [["DSIP 10mg Nasal", "ORN-DSP10", "$59.99", "$119.99", "/collections/all"]]}, "neuriva": {"id": "neuriva", "name": "Neuriva", "compound": "PE-22-28", "delivery": "Nasal", "focus": "cognitive", "tagline": "Neurogenic research.", "story": "Neuriva is our PE-22-28 nasal line for in-vitro research into neurogenic signaling pathways. Investigated in models of neural-associated cascades. Every lot is purity-verified by HPLC-UV with published COAs.", "products": [["PE-22-28 10mg Nasal", "ORN-PE2210", "$74.99", "$149.99", "/collections/all"]]}, "cellura": {"id": "cellura", "name": "Cellura", "compound": "NAD+", "delivery": "Nasal", "focus": "metabolic", "tagline": "Cellular energetics research.", "story": "Cellura supplies NAD+ for laboratory research into cellular energetics and redox-associated signaling pathways. The coenzyme has been investigated in models of mitochondrial-associated cascades. Nasal format, batch-qualified across seven assays.", "products": [["NAD+ 250mg Nasal", "ORN-NAD250", "$89.99", "$179.99", "/collections/all"]]}, "vitality": {"id": "vitality", "name": "Vitality", "compound": "Research Blend", "delivery": "Blend", "focus": "recovery", "tagline": "Multi-pathway blend research.", "story": "Vitality is a curated research blend for laboratories studying multi-pathway interactions in a single qualified lot. Each component is individually assayed before blending, and the finished blend is re-verified. For comparative pathway research only.", "products": [["Vitality Blend", "ORN-BLD-VIT", "$129.99", "$259.99", "/collections/all"]]}, "clarity": {"id": "clarity", "name": "Clarity", "compound": "Research Blend", "delivery": "Blend", "focus": "cognitive", "tagline": "Cognitive blend research.", "story": "Clarity is a research blend formulated for laboratories investigating cognitive-associated peptide pathways in combination. Components are individually qualified, then the finished blend is re-assayed for consistency. Research use only.", "products": [["Clarity Blend", "ORN-BLD-CLR", "$89.99", "$179.99", "/collections/all"]]}, "radiance": {"id": "radiance", "name": "Radiance", "compound": "Research Blend", "delivery": "Blend", "focus": "skin", "tagline": "Dermal blend research.", "story": "Radiance is a research blend for laboratories studying dermal-associated peptide pathways in combination. Each component carries its own lot-matched COA, and the finished blend is verified as a complete unit. For in-vitro research only.", "products": [["Radiance Blend", "ORN-BLD-RAD", "$109.99", "$219.99", "/collections/all"]]}, "repair": {"id": "repair", "name": "Repair", "compound": "Research Stack", "delivery": "Stack", "focus": "recovery", "tagline": "Recovery stack research.", "story": "Repair is a curated research stack for laboratories running comparative recovery-pathway studies across multiple compounds. Each vial is individually qualified with lot-matched COAs; the stack ships as a matched set. Research use only.", "products": [["Repair Stack", "ORN-STK-RPR", "$199.99", "$399.99", "/collections/all"]]}, "longevity": {"id": "longevity", "name": "Longevity", "compound": "Research Stack", "delivery": "Stack", "focus": "recovery", "tagline": "Longevity stack research.", "story": "Longevity is a research stack for laboratories investigating cellular-aging-associated pathways across multiple qualified compounds. Every component is seven-assay verified with published COAs. For in-vitro research only.", "products": [["Longevity Stack", "ORN-STK-LNG", "$149.99", "$299.99", "/collections/all"]]}};
+;
+  (function(){
+    function getParam(n){ var m = new RegExp('[?&]'+n+'=([^&]*)').exec(window.location.search); return m ? decodeURIComponent(m[1]) : null; }
+    var id = getParam('b') || 'recura';
+    var b = BRANDS[id] || BRANDS['recura'];
+    document.title = b.name + ' (' + b.compound + ') — Buy Online for Research | OranR';
+    document.getElementById('crumb-brand').textContent = b.name;
+    document.getElementById('brand-name').textContent = b.name;
+    document.getElementById('brand-compound').textContent = b.compound + ' · ' + b.delivery;
+    document.getElementById('brand-story').textContent = b.story;
+    document.getElementById('brand-products-h').textContent = b.name + ' Products';
+    var meta = document.getElementById('brand-meta');
+    meta.innerHTML =
+      '<span class="meta-pill">' + b.delivery + '</span>' +
+      '<span class="meta-pill">' + b.focus.charAt(0).toUpperCase() + b.focus.slice(1) + ' research</span>' +
+      '<a class="meta-pill" href="/collections/all">Shop all compounds</a>' +
+      '<a class="meta-pill" href="/pages/brands">All brands</a>';
+    var wrap = document.getElementById('brand-products');
+    wrap.innerHTML = b.products.map(function(p){
+      return '<a href="' + (p[4]||"/collections/all") + '" class="brand-card" style="text-align:left;">' +
+        '<div class="brand-mark" style="font-size:1.25rem;">' + p[0] + '</div>' +
+        '<div class="compound">SKU ' + p[1] + '</div>' +
+        '<p class="tagline">For laboratory research use only. 21+.</p>' +
+        '<div style="display:flex;gap:.6rem;align-items:baseline;margin-top:.4rem;">' +
+        '<strong style="font-size:1.15rem;color:var(--teal-dark);">' + p[2] + '</strong>' +
+        '<s style="color:var(--text-faint);">' + p[3] + '</s></div></a>';
+    }).join('');
+    document.getElementById('brand-backlinks').innerHTML =
+      'Browse <a href="/collections/all#f-' + b.delivery.split(' ')[0].toLowerCase() + '">' + b.delivery + '</a> compounds, ' +
+      'explore <a href="/collections/all#f-' + b.focus + '">' + b.focus + '</a> research, ' +
+      'read <a href="/blogs/news">research guides</a>, or <a href="/pages/brands">compare all brands</a>.';
+    var ld = {
+      "@context": "https://schema.org", "@type": "Brand", "name": b.name,
+      "description": b.tagline + " For laboratory research use only.",
+      "url": "https://oranr.com/pages/brand-" + b.id
+    };
+    document.getElementById('brand-jsonld').textContent = JSON.stringify(ld);
+    // Exposed for the single-file preview tab switcher
+    window.showBrand = function(nid){
+      var nb = BRANDS[nid] || BRANDS['recura'];
+      document.getElementById('crumb-brand').textContent = nb.name;
+      document.getElementById('brand-name').textContent = nb.name;
+      document.getElementById('brand-compound').textContent = nb.compound + ' · ' + nb.delivery;
+      document.getElementById('brand-story').textContent = nb.story;
+      document.getElementById('brand-products-h').textContent = nb.name + ' Products';
+      document.getElementById('brand-products').innerHTML = nb.products.map(function(p){
+        return '<a href="#" data-goto="product" class="brand-card" style="text-align:left;">' +
+          '<div class="brand-mark" style="font-size:1.25rem;">' + p[0] + '</div>' +
+          '<div class="compound">SKU ' + p[1] + '</div>' +
+          '<p class="tagline">For laboratory research use only. 21+.</p>' +
+          '<div style="display:flex;gap:.6rem;align-items:baseline;margin-top:.4rem;">' +
+          '<strong style="font-size:1.15rem;color:var(--teal-dark);">' + p[2] + '</strong>' +
+          '<s style="color:var(--text-faint);">' + p[3] + '</s></div></a>';
+      }).join('');
+      document.getElementById('brand-backlinks').innerHTML =
+        'Browse <a href="#" data-goto="collections">' + nb.delivery + '</a> compounds, ' +
+        'explore <a href="#" data-goto="collections">' + nb.focus + '</a> research, ' +
+        'read <a href="#" data-goto="blog">research guides</a>, or <a href="#" data-goto="brands">compare all brands</a>.';
+      document.title = nb.name + ' (' + nb.compound + ') — Buy Online for Research | OranR';
+      window.scrollTo(0,0);
+    };
+  })();
+  
+</script>

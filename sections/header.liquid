@@ -1,0 +1,125 @@
+{%- comment -%} Site header + mobile drawer (from mockup) {%- endcomment -%}
+<header class="site-header">
+    <div class="header-inner">
+      {% render 'logo', label: 'OR&R — Research Compounds', sub: true %}
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/collections/all">Shop All</a></li>
+          <li><a href="/collections/all#f-nasal">Nasal Sprays</a></li>
+          <li><a href="/collections/all#f-injectables">Injectables</a></li>
+          <li><a href="/collections/all#f-blends">Blends &amp; Stacks</a></li>
+          <li class="has-drop">
+            <a href="/pages/brands" class="drop-toggle" aria-haspopup="true">Brands</a>
+            <div class="drop-menu" role="menu">
+              <div class="drop-grid">
+                <a href="/pages/brand?b=recura">Recura<small>BPC-157</small></a>
+                <a href="/pages/brand?b=tissura">Tissura<small>TB-500</small></a>
+                <a href="/pages/brand?b=cutigen">Cutigen<small>GHK-Cu</small></a>
+                <a href="/pages/brand?b=pulsara">Pulsara<small>Ipamorelin</small></a>
+                <a href="/pages/brand?b=serelia">Serelia<small>CJC-1295</small></a>
+                <a href="/pages/brand?b=melacore">Melacore<small>Melanotan II</small></a>
+                <a href="/pages/brand?b=cogniva">Cogniva<small>Semax</small></a>
+                <a href="/pages/brand?b=serenex">Serenex<small>Selank</small></a>
+                <a href="/pages/brand?b=bondra">Bondra<small>Oxytocin · Nasal</small></a>
+                <a href="/pages/brand?b=cellura">Cellura<small>NAD+ · Nasal</small></a>
+                <a href="/pages/brand?b=vitality">Vitality<small>Blend</small></a>
+                <a href="/pages/brand?b=repair">Repair<small>Stack</small></a>
+              </div>
+              <div class="drop-foot"><a href="/pages/brands">View all 21 brands →</a></div>
+            </div>
+          </li>
+          <li><a href="/#quality">Quality</a></li>
+          <li><a href="/blogs/news">Research Blog</a></li>
+          <li><a href="/#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="drawer-head">
+      {% render 'logo', label: 'OR&R', sub: false %}
+      <button class="drawer-close" id="drawer-close" aria-label="Close navigation menu">&times;</button>
+    </div>
+    <div class="drawer-search">
+      <input type="search" placeholder="Search compounds, articles…" aria-label="Search the site">
+    </div>
+    <nav class="drawer-body">
+      <div class="drawer-group open">
+        <button type="button" aria-expanded="true">Shop by Delivery <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/collections/all">Shop All Compounds</a></li>
+            <li><a href="/collections/all#f-injectables">Injectables</a></li>
+            <li><a href="/collections/all#f-nasal">Nasal Sprays</a></li>
+            <li><a href="/collections/all#f-oral">Oral Capsules</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer-group">
+        <button type="button" aria-expanded="false">Shop by Research Focus <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/collections/all#f-recovery">Recovery &amp; Repair</a></li>
+            <li><a href="/collections/all#f-cognitive">Cognitive</a></li>
+            <li><a href="/collections/all#f-metabolic">Metabolic</a></li>
+            <li><a href="/collections/all#f-ghaxis">GH Axis</a></li>
+            <li><a href="/collections/all#f-skin">Skin &amp; Appearance</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer-group">
+        <button type="button" aria-expanded="false">Blends &amp; Stacks <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/collections/all#f-blends">Blends</a></li>
+            <li><a href="/collections/all#f-stacks">Stacks</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer-group">
+        <button type="button" aria-expanded="false">Research &amp; Learning <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/blogs/news">Research Blog</a></li>
+            <li><a href="/blogs/news/how-to-read-a-coa">How to Read a COA</a></li>
+            <li><a href="/#quality">Testing Methodology</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer-group">
+        <button type="button" aria-expanded="false">Shop by Brand <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/pages/brands">All Brands</a></li>
+            <li><a href="/pages/brand?b=recura">Recura (BPC-157)</a></li>
+            <li><a href="/pages/brand?b=tissura">Tissura (TB-500)</a></li>
+            <li><a href="/pages/brand?b=cutigen">Cutigen (GHK-Cu)</a></li>
+            <li><a href="/pages/brand?b=pulsara">Pulsara (Ipamorelin)</a></li>
+            <li><a href="/pages/brand?b=cogniva">Cogniva (Semax)</a></li>
+            <li><a href="/pages/brand?b=bondra">Bondra (Oxytocin)</a></li>
+            <li><a href="/pages/brand?b=vitality">Vitality (Blend)</a></li>
+            <li><a href="/pages/brand?b=repair">Repair (Stack)</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="drawer-group">
+        <button type="button" aria-expanded="false">Company <span class="dx">+</span></button>
+        <div class="drawer-sub">
+          <ul>
+            <li><a href="/#contact">Contact Us</a></li>
+            <li><a href="#shipping">Shipping &amp; Returns</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#wholesale">Wholesale</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="/collections/all" class="btn btn-primary btn-block drawer-cta">Browse the Catalog</a>
+    </nav>
+    <div class="drawer-foot">For laboratory research use only. 21+.</div>
+  </aside>
+{% schema %}
+{ "name": "Header", "settings": [] }
+{% endschema %}

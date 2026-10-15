@@ -1,0 +1,44 @@
+{%- comment -%} Cart page {%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    <span aria-current="page">Cart</span>
+  </nav>
+  <div class="center" style="margin:1.5rem 0;">
+    <h1>Your Cart</h1>
+  </div>
+  {%- if cart.item_count > 0 -%}
+  <form action="/cart" method="post" novalidate>
+    <table class="data-table">
+      <thead>
+        <tr><th>Product</th><th>Quantity</th><th style="text-align:right;">Total</th><th></th></tr>
+      </thead>
+      <tbody>
+        {%- for item in cart.items -%}
+        <tr>
+          <td>
+            <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a><br>
+            <span style="color:var(--text-muted); font-size:0.9rem;">{{ item.variant.title }}</span>
+          </td>
+          <td><input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:4rem;"></td>
+          <td style="text-align:right;">{{ item.line_price | money }}</td>
+          <td><a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="Remove">Remove</a></td>
+        </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    <div style="text-align:right; margin-top:1.5rem;">
+      <p class="price-row"><span>Subtotal</span> <span class="price">{{ cart.total_price | money }}</span></p>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Shipping &amp; taxes calculated at checkout. 21+ qualified researchers only.</p>
+      <button type="submit" name="update" class="btn btn-outline">Update Cart</button>
+      <button type="submit" name="checkout" class="btn btn-primary btn-lg">Checkout</button>
+    </div>
+  </form>
+  {%- else -%}
+  <div class="coa-placeholder">
+    <img class="doc-icon" src="{{ 'icon-shield.png' | asset_url }}" alt="" aria-hidden="true">
+    <h3>Your cart is empty</h3>
+    <p><a href="/collections/all" class="btn btn-primary">Browse the Catalog</a></p>
+  </div>
+  {%- endif -%}
+</div>

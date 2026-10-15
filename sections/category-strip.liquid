@@ -1,0 +1,49 @@
+{%- comment -%} Shop by category (from mockup) {%- endcomment -%}
+<!-- Shop by category -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Browse the catalog</span>
+        <h2>Shop by Category</h2>
+        <p class="lead">Three delivery formats, five research focuses. Every listing carries a batch-specific COA.</p>
+      </div>
+      <div class="cat-strip">
+        <a href="/collections/all#f-injectables" class="cat-card">
+          <img class="cat-icon" src="{{ 'icon-injectable.png' | asset_url }}" alt="" aria-hidden="true">
+          <h3>Injectables</h3>
+          <p>Lyophilized vials for reconstitution in the lab. Our core format.</p>
+          <span class="cat-link">Browse →</span>
+        </a>
+        <a href="/collections/all#f-nasal" class="cat-card">
+          <img class="cat-icon" src="{{ 'icon-nasal.png' | asset_url }}" alt="" aria-hidden="true">
+          <h3>Nasal Sprays</h3>
+          <p>Pre-mixed 10&nbsp;ml spray bottles — Semax, Selank, Oxytocin, NAD+ and more.</p>
+          <span class="cat-link">Browse →</span>
+        </a>
+        <a href="/collections/all#f-oral" class="cat-card">
+          <img class="cat-icon" src="{{ 'icon-blends.png' | asset_url }}" alt="" aria-hidden="true">
+          <h3>Oral Capsules</h3>
+          <p>Capsule formats for comparative bioavailability research models.</p>
+          <span class="cat-link">Browse →</span>
+        </a>
+        <a href="/collections/all#f-blends" class="cat-card">
+          <img class="cat-icon" src="{{ 'icon-lab.png' | asset_url }}" alt="" aria-hidden="true">
+          <h3>Blends &amp; Stacks</h3>
+          <p>Curated multi-compound sets for researchers studying interacting pathways.</p>
+          <span class="cat-link">Browse →</span>
+        </a>
+      </div>
+      <div class="center mt-2">
+        <p style="color:var(--text-muted); font-size:0.95rem;">Shopping by research focus?
+          <a href="/collections/all#f-recovery">Recovery</a> ·
+          <a href="/collections/all#f-cognitive">Cognitive</a> ·
+          <a href="/collections/all#f-metabolic">Metabolic</a> ·
+          <a href="/collections/all#f-ghaxis">GH Axis</a> ·
+          <a href="/collections/all#f-skin">Skin</a>
+        </p>
+      </div>
+    </div>
+  </section>
+{% schema %}
+{ "name": "Shop by category", "settings": [] }
+{% endschema %}

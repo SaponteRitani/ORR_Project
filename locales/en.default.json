@@ -1,0 +1,20 @@
+{
+  "general": {
+    "search": "Search",
+    "view_all": "View all",
+    "coming_soon": "Coming soon",
+    "21_plus": "For laboratory research use only. 21+."
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "quantity": "Quantity",
+    "sku": "SKU"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal"
+  }
+}

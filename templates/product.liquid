@@ -1,0 +1,208 @@
+{%- comment -%} Product page (mockup: product.html). Compliance banner renders FIRST. {%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a><span class="sep">›</span>
+    {%- else -%}
+      <a href="/collections/all">All Products</a><span class="sep">›</span>
+    {%- endif -%}
+    <span aria-current="page">{{ product.title }}</span>
+  </nav>
+
+  {% render 'compliance-banner' %}
+
+  <div class="product-layout">
+    <div class="product-gallery">
+      {%- if product.featured_image -%}
+        <div class="vial-stage vial-lg">
+          <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="900" height="900">
+        </div>
+      {%- else -%}
+        <div class="vial-stage vial-lg" role="img" aria-label="{{ product.title | escape }} research vial, placeholder image">
+          <div class="vial" style="--hue:190; --fill:52%;">
+            <div class="vial-cap"></div><div class="vial-neck"></div>
+            <div class="vial-body"><div class="vial-liquid"></div><div class="vial-shine"></div>
+              <div class="vial-label"><span class="vl-name">{{ product.title | truncate: 14 | escape }}</span><span class="vl-sub">Research Use Only</span><span class="vl-rulo">Research Use Only</span></div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+      <div class="coa-strip" aria-label="Available documentation">
+        <span class="coa-chip">✓ HPLC Report</span>
+        <span class="coa-chip">✓ LC-MS Report</span>
+        <span class="coa-chip">✓ Endotoxin Report</span>
+        <span class="coa-chip">✓ Sterility Report</span>
+      </div>
+    </div>
+
+    <div class="product-info">
+      {%- assign v = product.selected_or_first_available_variant -%}
+      <div class="card-cat">{{ product.type }}{% if v.sku != blank %} · SKU: {{ v.sku }}{% endif %}</div>
+      <h1>{{ product.title }}</h1>
+      {%- if product.description != blank -%}
+        <p style="color:var(--text-muted); font-size:0.95rem;">{{ product.description | strip_html | truncatewords: 30 }}</p>
+      {%- endif -%}
+
+      <div class="price-row">
+        <span class="price" id="product-price">{{ v.price | money }}</span>
+        {%- if v.compare_at_price > v.price -%}
+          <span class="price-compare">{{ v.compare_at_price | money }}</span>
+          {%- assign pct = v.compare_at_price | minus: v.price | times: 100.0 | divided_by: v.compare_at_price | round -%}
+          <span class="save-tag">SAVE {{ pct }}%</span>
+        {%- endif -%}
+      </div>
+
+      {%- form 'product', product, id: 'product-form' -%}
+        {%- if product.variants.size > 1 -%}
+          <div>
+            <strong style="font-size:0.9rem;">Options:</strong>
+            <div class="variant-pills" role="group" aria-label="Product options">
+              {%- for variant in product.variants -%}
+                <button class="variant-pill{% if variant == v %} active{% endif %}" type="button"
+                  data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}"
+                  {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+        <input type="hidden" name="id" id="variant-id" value="{{ v.id }}">
+        <div class="qty-row">
+          <div class="qty-selector" aria-label="Quantity selector">
+            <button type="button" data-qty="minus" aria-label="Decrease quantity">−</button>
+            <output id="qty-out" value="1">1</output>
+            <button type="button" data-qty="plus" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn-primary btn-lg" type="submit" name="add"
+            {% unless v.available %}disabled{% endunless %}>
+            {%- if v.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+          </button>
+        </div>
+        <input type="hidden" name="quantity" id="qty-input" value="1">
+      {%- endform -%}
+
+      <ul class="trust-bullets">
+        <li><strong>99%+ HPLC purity</strong> — verified on every batch</li>
+        <li>Identity confirmed by LC-MS against reference standard</li>
+        <li>Endotoxin &amp; sterility screened (USP &lt;85&gt; / USP &lt;71&gt;)</li>
+        <li>Batch-specific COA published below before sale</li>
+        <li>Same-day shipping before 2 PM ET · 30-day guarantee</li>
+      </ul>
+
+      <p class="product-meta">
+        <strong>Storage (lab):</strong> Lyophilized vials are shipped stable at ambient temperature. For laboratory storage guidance, see our <a href="/blogs/news/how-to-read-a-coa">Peptide Storage Guide</a>.<br>
+        <strong>Form:</strong> Sealed glass vial for laboratory research.
+      </p>
+    </div>
+  </div>
+
+  {%- if product.description != blank -%}
+  <section class="tab-section" aria-labelledby="mech-h">
+    <h2 id="mech-h">Research Overview</h2>
+    {{ product.description }}
+    <p style="font-size:0.9rem; color:var(--text-muted);">Related reading: <a href="/blogs/news/how-to-read-a-coa">How to Read a COA: A Researcher's Guide</a> · <a href="/blogs/news">More research articles</a></p>
+  </section>
+  {%- endif -%}
+
+  <section class="tab-section" aria-labelledby="chem-h">
+    <h2 id="chem-h">Chemical Data</h2>
+    {%- assign mf = product.metafields.oranr -%}
+    {%- if mf.cas != blank or mf.formula != blank or mf.molar_mass != blank or mf.sequence != blank -%}
+    <table class="data-table">
+      <tbody>
+        {%- if mf.cas != blank -%}<tr><th scope="row">CAS Number</th><td>{{ mf.cas }}</td></tr>{%- endif -%}
+        {%- if mf.formula != blank -%}<tr><th scope="row">Molecular Formula</th><td>{{ mf.formula }}</td></tr>{%- endif -%}
+        {%- if mf.molar_mass != blank -%}<tr><th scope="row">Molar Mass</th><td>{{ mf.molar_mass }}</td></tr>{%- endif -%}
+        {%- if mf.sequence != blank -%}<tr><th scope="row">Sequence</th><td>{{ mf.sequence }}</td></tr>{%- endif -%}
+        <tr><th scope="row">Form</th><td>{{ mf.form | default: 'Sealed glass vial' }}</td></tr>
+        {%- if v.sku != blank -%}<tr><th scope="row">SKU</th><td>{{ v.sku }}</td></tr>{%- endif -%}
+      </tbody>
+    </table>
+    <p class="table-note">Reference values shown for identification. Always confirm against the batch-specific COA below before use in research.</p>
+    {%- else -%}
+    <div class="coa-placeholder">
+      <img class="doc-icon" src="{{ 'icon-lab.png' | asset_url }}" alt="" aria-hidden="true">
+      <h3>Chemical data pending</h3>
+      <p>CAS number, molecular formula, molar mass, and sequence will appear here once product metafields are configured in Shopify admin (namespace <code>oranr</code>).</p>
+    </div>
+    {%- endif -%}
+  </section>
+
+  <section class="tab-section" aria-labelledby="coa-h">
+    <h2 id="coa-h">Certificate of Analysis</h2>
+    <p>Every OranR batch is qualified through seven independent assays before sale. The documents below correspond to the exact lot in this listing.</p>
+    <div class="coa-placeholder">
+      <img class="doc-icon" src="{{ 'icon-certificate.png' | asset_url }}" alt="" aria-hidden="true">
+      <h3>Batch Documentation</h3>
+      <p><strong>HPLC-UV chromatogram</strong> · <strong>LC-MS identity spectrum</strong> · <strong>Endotoxin (USP &lt;85&gt;) report</strong> · <strong>Sterility (USP &lt;71&gt;) report</strong> · <strong>Heavy metals (ICP-MS) report</strong><br><br>Placeholder — batch PDFs will be embedded here per lot, labeled with batch number, test date, and issuing laboratory. Upload COA files to Shopify Files and link them here.</p>
+    </div>
+  </section>
+
+  <section class="tab-section" aria-labelledby="faq-h">
+    <h2 id="faq-h">Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What does the COA tell me?<span class="fx">+</span></button>
+        <div class="faq-a"><div>The certificate of analysis documents the identity, purity, and contaminant screening results for this specific batch — including the test methods used, the issuing laboratory, and the date of analysis. Our guide <a href="/blogs/news/how-to-read-a-coa">How to Read a COA</a> walks through each section.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Who can purchase this product?<span class="fx">+</span></button>
+        <div class="faq-a"><div>Qualified researchers aged 21 or older, purchasing for lawful in-vitro laboratory research. By ordering, you confirm the product will not be used for human or veterinary purposes.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you provide dosing or usage instructions?<span class="fx">+</span></button>
+        <div class="faq-a"><div>No. We supply chemical characterization data only and do not provide dosing, administration, cycling, or usage guidance of any kind.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How is it shipped?<span class="fx">+</span></button>
+        <div class="faq-a"><div>Lyophilized vials ship in protective, discreet packaging. Orders placed before 2 PM ET ship the same business day.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if my independent test disagrees with your COA?<span class="fx">+</span></button>
+        <div class="faq-a"><div>Send us the third-party results. If a qualified laboratory's findings don't match our published COA for your batch, we refund the order in full.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-section" aria-labelledby="rev-h">
+    <h2 id="rev-h">Researcher Reviews</h2>
+    <div class="reviews-placeholder">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <p><strong>Placeholder.</strong> Verified-purchase reviews from qualified researchers will appear here, moderated for compliance (no medical claims, no usage discussion).</p>
+    </div>
+  </section>
+
+  {%- assign related = collections.all.products | where: 'id', product.id -%}
+  {%- comment -%} related: same collection siblings {%- endcomment -%}
+  <section class="tab-section" aria-labelledby="rel-h">
+    <h2 id="rel-h">Related Research Compounds</h2>
+    <div class="related-grid">
+      {%- assign shown = 0 -%}
+      {%- for p in collections.all.products -%}
+        {%- if p.id != product.id and shown < 4 -%}
+          {% render 'product-card', product: p %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "sku": {{ v.sku | json }},
+    "category": "Research Peptides",
+    "description": {{ product.description | strip_html | truncatewords: 40 | json }},
+    "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": {{ shop.currency | json }},
+      "price": {{ v.price | divided_by: 100.0 | json }},
+      "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+      "url": {{ shop.url | append: product.url | json }}
+    }
+  }
+  </script>
+</div>

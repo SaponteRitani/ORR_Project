@@ -1,0 +1,16 @@
+{%- comment -%} OR&R molecular chain logo v4 — letters baked into bonded hexagon cells. Usage: {% render 'logo', label: 'OR&R — Research Compounds', sub: true %} {%- endcomment -%}
+<a href="/" class="logo logo-med" aria-label="{{ label | default: 'OR&R' }}">
+<svg class="logo-svg" viewBox="0 0 405 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="mcTeal" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#17b3c9"/><stop offset="100%" stop-color="#0b6b78"/></linearGradient></defs><g font-family="Sora,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-weight="800" font-size="40" text-anchor="middle"><g transform="translate(60,58)"><polygon class="mc-cell" points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" stroke-width="5"/><text class="mc-letter" y="14">O</text><circle class="mc-bond" cx="-19" cy="-36" r="4.5" fill="currentColor" stroke="none"/><line class="mc-bond" x1="-19" y1="-36" x2="-29" y2="-48" stroke-width="3"/></g><line class="mc-bond" x1="98" y1="50" x2="117" y2="50" stroke-width="4"/><line class="mc-bond" x1="98" y1="66" x2="117" y2="66" stroke-width="4"/><g transform="translate(155,58)"><polygon class="mc-cell" points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" stroke-width="5"/><text class="mc-letter" y="14">R</text></g><line class="mc-ampbond" x1="193" y1="50" x2="212" y2="50" stroke-width="4"/><line class="mc-ampbond" x1="193" y1="66" x2="212" y2="66" stroke-width="4"/><g transform="translate(250,58)"><polygon class="mc-ampcell" points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" stroke-width="7"/><text class="mc-ampletter" y="15" font-size="44">&amp;</text><circle cx="19" cy="-36" r="4.5" fill="url(#mcTeal)"/><line class="mc-ampbond" x1="19" y1="-36" x2="29" y2="-48" stroke-width="3"/></g><line class="mc-bond" x1="288" y1="50" x2="307" y2="50" stroke-width="4"/><line class="mc-bond" x1="288" y1="66" x2="307" y2="66" stroke-width="4"/><g transform="translate(345,58)"><polygon class="mc-cell" points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" stroke-width="5"/><text class="mc-letter" y="14">R</text><circle class="mc-bond" cx="24" cy="33" r="4.5" fill="currentColor" stroke="none"/><line class="mc-bond" x1="24" y1="33" x2="34" y2="45" stroke-width="3"/></g></g></svg>
+{%- if sub -%}<small>Research Compounds</small>{%- endif -%}
+</a>
+<style>
+.mc-cell{fill:#ffffff;stroke:#1e293b;}
+.mc-letter{fill:#1e293b;}
+.mc-bond{stroke:#1e293b;color:#1e293b;}
+.mc-ampcell{fill:#ffffff;stroke:url(#mcTeal);}
+.mc-ampletter{fill:url(#mcTeal);}
+.mc-ampbond{stroke:url(#mcTeal);}
+.site-footer .mc-cell{fill:none;stroke:#e2e8f0;}
+.site-footer .mc-letter{fill:#f8fafc;}
+.site-footer .mc-bond{stroke:#e2e8f0;color:#e2e8f0;}
+</style>
