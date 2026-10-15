@@ -1,0 +1,90 @@
+{%- comment -%} Site footer incl. compliance disclaimer stack (do not remove) {%- endcomment -%}
+<footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          {% render 'logo', label: 'OranR', sub: false %}
+          <p class="mt-1">Laboratory-grade research peptides. Seven-assay qualification on every batch, COAs published before sale.</p>
+          <p style="font-size:0.85rem;">Questions about a batch? Contact us:<br><a href="mailto:support@oranr.com">support@oranr.com</a></p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/pages/brands"><strong>Shop by Brand →</strong></a></li>
+            <li><a href="/pages/brand?b=recura">Recura</a></li>
+            <li><a href="/pages/brand?b=tissura">Tissura</a></li>
+            <li><a href="/pages/brand?b=cutigen">Cutigen</a></li>
+            <li><a href="/pages/brand?b=cogniva">Cogniva</a></li>
+            <li><a href="/pages/brand?b=bondra">Bondra</a></li>
+            <li><a href="/pages/brand?b=vitality">Vitality</a></li>
+            <li><a href="/collections/all">All Compounds</a></li>
+            <li><a href="/collections/all#f-injectables">Injectables</a></li>
+            <li><a href="/collections/all#f-nasal">Nasal Sprays</a></li>
+            <li><a href="/collections/all#f-oral">Oral Capsules</a></li>
+            <li><a href="/collections/all#f-recovery">Recovery &amp; Repair</a></li>
+            <li><a href="/collections/all#f-cognitive">Cognitive</a></li>
+            <li><a href="/collections/all#f-metabolic">Metabolic</a></li>
+            <li><a href="/collections/all#f-ghaxis">GH Axis</a></li>
+            <li><a href="/collections/all#f-skin">Skin &amp; Appearance</a></li>
+            <li><a href="/collections/all#f-blends">Blends</a></li>
+            <li><a href="/collections/all#f-stacks">Stacks</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Research</h4>
+          <ul>
+            <li><a href="/blogs/news">Research Blog</a></li>
+            <li><a href="/blogs/news/how-to-read-a-coa">How to Read a COA</a></li>
+            <li><a href="/blogs/news">Peptide Storage Guide</a></li>
+            <li><a href="/blogs/news">HPLC vs. LC-MS Explained</a></li>
+            <li><a href="/blogs/news">Endotoxin Testing Guide</a></li>
+            <li><a href="/#quality">Testing Methodology</a></li>
+            <li><a href="/#quality">Our 7 Assays</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About OranR</a></li>
+            <li><a href="/#contact">Contact Us</a></li>
+            <li><a href="#shipping">Shipping &amp; Returns</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#wholesale">Wholesale</a></li>
+            <li><a href="#guarantee">30-Day Guarantee</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Compliance</h4>
+          <ul>
+            <li><a href="#research-use">Research Use Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#age">21+ Age Requirement</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="newsletter" style="background:transparent; border:1px solid rgba(255,255,255,.14); margin-bottom:2.5rem;">
+        <h2 style="color:#fff;">Batch-Release Alerts</h2>
+        <p style="color:#b9c8d8;">New lots, restocks, and research-education articles. One email a week. Researchers 21+ only.</p>
+        <form class="news-form" action="#" method="post">
+          <input type="email" name="email" placeholder="you@yourlab.org" aria-label="Email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-disclaimer">
+        <strong>RESEARCH USE ONLY — PLEASE READ:</strong> All products sold by OranR are intended strictly for in-vitro laboratory research use. They are not intended for human or veterinary use, consumption, injection, topical application, or any form of bodily introduction. These products are not drugs, foods, dietary supplements, or cosmetics, and they have not been approved by the U.S. Food and Drug Administration for any use. They are not intended to diagnose, treat, cure, or prevent any disease or medical condition. No dosing, administration, cycling, or usage guidance is provided or implied. Purchasers must be 21 years of age or older and qualified to handle research compounds in a controlled laboratory setting. By purchasing from OranR, you confirm that you will use these products solely for lawful research purposes and you assume full responsibility for compliance with all applicable local, state, and federal laws and regulations.
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> OranR. All rights reserved.</span>
+        <span>For laboratory research use only. 21+.</span>
+      </div>
+    </div>
+  </footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "disclaimer", "label": "Compliance disclaimer", "default": "RESEARCH USE ONLY — PLEASE READ: All products sold by OranR are intended strictly for in-vitro laboratory research use. They are not intended for human or veterinary use, consumption, injection, topical application, or any form of bodily introduction. These products are not drugs, foods, dietary supplements, or cosmetics, and they have not been approved by the U.S. Food and Drug Administration for any use." }
+  ]
+}
+{% endschema %}

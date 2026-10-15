@@ -1,0 +1,15 @@
+{%- comment -%} Announcement bar — text editable in theme settings {%- endcomment -%}
+{%- if section.settings.show_bar -%}
+<div class="announce">
+  {{ section.settings.text }}
+</div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "checkbox", "id": "show_bar", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "text", "label": "Announcement text", "default": "<strong>&ge;99% purity</strong> on every batch &nbsp;·&nbsp; Same-day shipping before 2 PM ET &nbsp;·&nbsp; Batch COAs published before sale" }
+  ]
+}
+{% endschema %}

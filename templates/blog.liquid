@@ -1,0 +1,47 @@
+{%- comment -%} Blog index (mockup: blog.html) {%- endcomment -%}
+{% paginate blog.articles by 9 %}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span>
+    <span aria-current="page">{{ blog.title }}</span>
+  </nav>
+  <div class="center" style="margin-top:1rem;">
+    <span class="eyebrow">Education for researchers</span>
+    <h1>{{ blog.title | default: 'The Research Blog' }}</h1>
+    <p class="lead">Plain-English guides to testing methodology, compound chemistry, and lab practice. Written for qualified researchers — no hype, no medical claims.</p>
+  </div>
+  <div class="blog-grid mb-2">
+    {%- for article in blog.articles -%}
+    <article class="blog-card">
+      <a href="{{ article.url }}" aria-label="Read: {{ article.title | escape }}">
+        {%- if article.image -%}
+          <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy">
+        {%- else -%}
+          <div class="blog-visual" role="img" aria-label="{{ article.title | escape }} illustration"><img src="{{ 'icon-certificate.png' | asset_url }}" alt="" aria-hidden="true"></div>
+        {%- endif -%}
+      </a>
+      <div class="card-body">
+        {%- if article.tags.size > 0 -%}<span class="blog-tag">{{ article.tags.first }}</span>{%- endif -%}
+        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <div class="blog-meta">By {{ article.author }} · {{ article.published_at | date: '%b %-d, %Y' }}</div>
+        <p class="card-mech">{{ article.excerpt_or_content | strip_html | truncatewords: 28 }}</p>
+        <a href="{{ article.url }}" class="cat-link">Read article →</a>
+      </div>
+    </article>
+    {%- else -%}
+    <div class="coa-placeholder" style="grid-column:1/-1;">
+      <img class="doc-icon" src="{{ 'icon-certificate.png' | asset_url }}" alt="" aria-hidden="true">
+      <h3>Articles coming soon</h3>
+      <p>Research guides will appear here once blog articles are published in Shopify admin.</p>
+    </div>
+    {%- endfor -%}
+  </div>
+  {%- if paginate.pages > 1 -%}
+  <nav class="pagination center" aria-label="Pagination">
+    {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn-outline">← Previous</a>{%- endif -%}
+    <span style="margin:0 1rem;">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+    {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn-outline">Next →</a>{%- endif -%}
+  </nav>
+  {%- endif -%}
+</div>
+{% endpaginate %}

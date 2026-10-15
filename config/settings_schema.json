@@ -1,0 +1,44 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "OranR",
+    "theme_version": "1.0.0",
+    "theme_author": "OranR",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Brand accent (red)",
+        "default": "#c8102e"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_dark",
+        "label": "Brand accent dark",
+        "default": "#9c0c24"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Text / charcoal",
+        "default": "#23272e"
+      }
+    ]
+  },
+  {
+    "name": "Announcement bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement bar",
+        "default": true
+      }
+    ]
+  }
+]
